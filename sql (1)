@@ -1,0 +1,145 @@
+create database ProPanels
+use  ProPanels
+
+create table cliente(
+id_cliente INT PRIMARY KEY identity (10, 1),
+nombre VARCHAR(50),
+direccion VARCHAR(50),
+telefono VARCHAR(15),
+correo_electronico VARCHAR(83)
+)
+INSERT INTO cliente VALUES ('Juan Perez', 'cr27c #103c 43', '3220432345', 'juan.perez@gmail.com');
+INSERT INTO cliente VALUES ('Maria Lopez', 'avenida 435', '30304323455', 'marialopez32@gmail.com');
+INSERT INTO cliente VALUES ('Jorge Ramoz', 'cr63T#107T98', '3220454445', 'JorgeRamozgmail.com');
+INSERT INTO cliente VALUES ('Sandra Ortiz', 'cr27B#103B56', '333456745', 'Sandra456@gmail.com');
+INSERT INTO cliente VALUES ('Jhoana Salazar', 'cr55D #103D 43', '3220432345', 'jhoanaSalazar@gmail.com');
+INSERT INTO cliente VALUES ('Juana Guzman', 'cr27C #209B interios 1', '3220432345', 'guzmanjuana3@gmail.com');
+INSERT INTO cliente VALUES ('Yerno Torres', 'cll78C #299B interios 09', '3220432345', 'torres65@gmail.com');
+INSERT INTO cliente VALUES ('siete cinco', 'cr55D #445t 43', '3220989345', 'sietecinc0@gmail.com');
+INSERT INTO cliente VALUES ('Jarla Perea', 'cr45L #233L 03', '3020432333', 'jarla43pere@gmail.com');
+INSERT INTO cliente VALUES ('Sofia Taborda', 'cr45D #983D 73', '3009432367', 'sofiataborda@gmail.com');
+INSERT INTO cliente VALUES ('Sofia Alvarez', 'cr45D #983D 44', '3039432367', 'Alvares34@gmail.com');
+
+select * from cliente
+
+create table panel(
+id_panel_solar  INT PRIMARY KEY identity(10, 1),
+tipo_panel VARCHAR(89),
+caracteristicas VARCHAR(100),
+fabricantes varchar(30)
+)
+INSERT INTO panel VALUES ('solar', 'vidrio, aluminio y silicio', 'Trina Solar');
+INSERT INTO panel VALUES ( 'solar', 'silicio', 'Trina Solar');
+INSERT INTO panel VALUES ( 'solar', 'Acrilico silincon', 'Trina Solar');
+INSERT INTO panel VALUES ( 'solar', 'M silicio amorfo', 'Trina Solar');
+INSERT INTO panel VALUES ('solar', 'silicio', 'Trina Solar');
+INSERT INTO panel VALUES ( 'solar', 'Silicio Crilicon', 'Trina Solar');
+INSERT INTO panel VALUES ( 'solar', 'Bifaciales', 'Trina Solar');
+INSERT INTO panel VALUES ('solar', 'Policristialinos', 'Trina Solar');
+
+
+
+
+create table empleado(
+id_empleado INT PRIMARY KEY identity (10, 1),
+nombre VARCHAR(90),
+horario_empleado DATETIME,
+telefono VARCHAR(15),
+seguro_social VARCHAR(100)
+)
+INSERT INTO empleado VALUES ( 'Juan Salinas', '2024-10-13 07:00:00', '3450982344', '123-45-6789');
+INSERT INTO empleado VALUES ( 'Pablo Gonzales', '2024-10-13 07:00:00', '345043244', '124-95-6787');
+INSERT INTO empleado VALUES ( 'Sara Sanchez', '2024-10-13 07:00:00', '3343012234', '122-33-4509');
+INSERT INTO empleado VALUES ( 'Pedro Ochoa', '2024-10-13 07:00:00', '3146544576', '163-12-0082');
+INSERT INTO empleado VALUES ( 'Olando Salazar', '2024-10-13 07:00:00', '3224356789', '369-05-6719');
+INSERT INTO empleado VALUES ('Mateo Perez', '2024-10-13 07:00:00', '3228888', '369-05-6719');
+INSERT INTO empleado VALUES ('Arturo Gallego', '2024-10-13 07:00:00', '4555789', '369-05-6719');
+INSERT INTO empleado VALUES ('Camilo Ortiz', '2024-10-13 07:00:00', '30056789', '369-05-6719');
+INSERT INTO empleado VALUES ('Daniela Periañes', '2024-10-13 07:00:00', '311356789', '369-05-6719');
+INSERT INTO empleado VALUES ('Sofia Ocho', '2024-10-13 07:00:00', '3224356787', '369-05-6719');
+
+
+create table instalacion(
+id_instalacion INT PRIMARY KEY identity (18, 1),
+id_cliente INT,
+id_panel_solar  INT,
+id_empleado INT, -- Nueva columna para la relación con empleados
+fecha_instalacion DATETIME,
+direccion_instalacion VARCHAR(290)
+FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+FOREIGN KEY (id_panel_solar) REFERENCES panel(id_panel_solar),
+FOREIGN KEY (id_empleado) REFERENCES empleado(id_empleado)
+);
+INSERT INTO instalacion VALUES (17, 17, 10, '2022-09-13 06:00:00', 'cr27c#103c43');
+INSERT INTO instalacion VALUES (16, 16, 11, '2022-11-16 07:23:00', 'avenida 435');
+INSERT INTO instalacion VALUES (15, 15, 12, '2022-08-15 06:03:00', 'cr63T#107T98');
+INSERT INTO instalacion VALUES (13, 14, 13, '2022-07-06 08:23:00', 'cr27B#103B56');
+INSERT INTO instalacion VALUES (14, 13, 14, '2024-12-14 04:40:00', 'cr55D #103D 43');
+INSERT INTO instalacion VALUES (12, 12, 15, '2021-09-11 05:30:00', 'cr27C #209B interios 1');
+INSERT INTO instalacion VALUES (11, 11, 16, '2024-09-03 02:01:00', 'cll78C #299B interios 09');
+INSERT INTO instalacion VALUES (10, 10, 17, '2023-09-23 06:44:30', 'cr55D #445t 43');
+
+select * from instalacion
+select * from empleado
+select * from empleado
+create table mantenimiento(
+id_mantenimiento INT PRIMARY KEY identity (10, 1),
+id_panel_solar  INT,
+fecha_mantenimiento DATETIME,
+descripcion VARCHAR(100)
+FOREIGN KEY (id_panel_solar) REFERENCES panel(id_panel_solar)
+);
+INSERT INTO mantenimiento VALUES (10, '2022-12-16 07:23:00', 'Cambio')
+INSERT INTO mantenimiento VALUES (11, '2024-02-16 07:24:00', 'Revision')
+INSERT INTO mantenimiento VALUES (12, '2023-01-16 01:25:00', 'Cambio')
+INSERT INTO mantenimiento VALUES (13, '2024-07-16 10:26:00', 'Revision')
+INSERT INTO mantenimiento VALUES (14, '2025-09-16 08:23:00', 'Cambio')
+INSERT INTO mantenimiento VALUES (15, '2023-11-16 06:13:00', 'Cambio')
+INSERT INTO mantenimiento VALUES (16, '2024-08-16 04:53:00', 'Revision')
+
+select * from mantenimiento
+create table facturacion(
+id_factura INT PRIMARY KEY identity (10, 1),
+id_cliente INT,
+fecha_facturacion DATETIME,
+monto DECIMAL (10, 2),
+FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+);
+INSERT INTO facturacion VALUES (10,'2022-12-16 07:23:00.000', 330.096)
+INSERT INTO facturacion VALUES (11,'2024-02-16 07:24:00', 1000.500)
+INSERT INTO facturacion VALUES (12,'2023-01-16 01:25:00.000', 3000.000)
+INSERT INTO facturacion VALUES (13,'2022-11-16 07:23:00.000', 150.5589)
+INSERT INTO facturacion VALUES (14,'2024-12-14 04:40:00.000', 550.0000)
+INSERT INTO facturacion VALUES (15,'2025-09-16 08:23:00.000', 100.50)
+INSERT INTO facturacion VALUES (16,'2021-09-11 05:30:00.000', 890.99)
+INSERT INTO facturacion VALUES (17,'2023-11-16 06:13:00.000', 189.08)
+INSERT INTO facturacion VALUES (18,'2024-02-16 07:24:00.000', 190.900)
+select * from cliente
+select * from panel
+select * from empleado
+select * from instalacion
+select * from mantenimiento
+select * from facturacion
+
+SELECT nombre, correo_electronico FROM cliente;
+
+SELECT fecha_instalacion, direccion_instalacion FROM instalacion;
+
+
+SELECT 
+    c.nombre AS Cliente,
+    i.fecha_instalacion AS FechaInstalacion
+FROM 
+    cliente c
+INNER JOIN 
+    instalacion i ON c.id_cliente = i.id_cliente;
+
+
+	SELECT 
+    p.tipo_panel AS TipoPanel,
+    i.direccion_instalacion AS DireccionInstalacion
+FROM 
+    panel p
+INNER JOIN 
+    instalacion i ON p.id_panel_solar = i.id_panel_solar;
+
